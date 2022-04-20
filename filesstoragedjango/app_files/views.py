@@ -29,7 +29,7 @@ class FileUploadViewSet(viewsets.ModelViewSet):
         if file_size_mb > float(MAX_SIZE_MB):
             raise ValidationError(detail=f"Your file too big - {round(file_size_mb, 2)} MB, please, "
                                          f"upload files less than {MAX_SIZE_MB} MB")
-        if FileUpload.objects.filter(file_hash=file_hash):
+        if FileUpload.objects.filter(owner=self.request.user).filter(file_hash=file_hash):
             raise ValidationError(detail="You have already have File with same content")
 
         serializer.save(owner=owner, file=file, file_hash=file_hash)
