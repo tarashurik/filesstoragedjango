@@ -22,6 +22,7 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
 DB_PORT = os.environ.get('DB_PORT')
 UPLOAD_DIR = os.environ.get('UPLOAD_FILES_DIR')
+MAX_SIZE_MB = os.environ.get('MAX_SIZE_UPLOADED_FILES_MB')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -145,4 +146,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '/', UPLOAD_DIR)
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/files/'
