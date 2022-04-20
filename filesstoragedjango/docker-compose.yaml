@@ -1,31 +1,25 @@
 version: "3.9"
 services:
 
+  filestorage:
+    build: .
+    container_name: filestorage
+    command: bash .sh
+    volumes:
+      - .:/usr/src/
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    depends_on:
+      - db
+
   db:
-    image: postgres:latest
+    image: postgres
     ports:
       - "${DB_PORT}:5432"
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_DATABASE}
-
-#  app:
-#    build: .
-#    container_name: app
-##    command: uvicorn main:app --host=0.0.0.0 --reload
-##    deploy:
-##      restart_policy:
-##        condition: on-failure
-##        delay: 5s
-##        max_attempts: 3
-#    restart: always
-#    volumes:
-#      - .:/usr/src/
-#    ports:
-#      - "8000:8000"
-#    depends_on:
-#      db:
-#        condition: service_started
-##        condition: service_healthy
-##        condition: service_completed_successfully
