@@ -3,7 +3,7 @@ import hashlib
 from rest_framework import viewsets, permissions
 from rest_framework.exceptions import ValidationError
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 
 from filesstoragedjango.settings import MAX_SIZE_MB
@@ -16,7 +16,7 @@ class FileUploadViewSet(viewsets.ModelViewSet):
     queryset = FileUpload.objects.all()
     serializer_class = FileUploadSerializer
     parser_classes = (MultiPartParser, FormParser,)
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated, IsAuthor]
 
     def perform_create(self, serializer):
