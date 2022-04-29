@@ -45,6 +45,7 @@ class FilesTest(TestCase):
             data = {'file': file_copy}
             response = self.client.post(file_url, data=data)
         self.assertEqual(response.status_code, 400)
+        self.assertTrue('You have already have File with same content' in str(response.content))
 
     def test_too_big_file_upload(self):
         self.register_admin()
@@ -54,3 +55,5 @@ class FilesTest(TestCase):
             data = {'file': file_too_big}
             response = self.client.post(file_url, data=data)
         self.assertEqual(response.status_code, 400)
+        self.assertTrue('Your file too big' in str(response.content))
+
