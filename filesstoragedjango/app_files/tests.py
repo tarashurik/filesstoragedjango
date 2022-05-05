@@ -56,4 +56,3 @@ class FilesTest(TestCase):
             response = self.client.post(file_url, data=data)
         self.assertEqual(response.status_code, 400)
         self.assertTrue('Your file too big' in str(response.content))
-
