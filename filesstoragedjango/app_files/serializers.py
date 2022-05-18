@@ -27,7 +27,7 @@ class FileUploadSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
     def create(self, validated_data):
-        logger.info('Start create file')
+        # logger.info('Start creating file')
 
         file = validated_data.get('file')
         owner = validated_data.get('owner')
@@ -48,5 +48,5 @@ class FileUploadSerializer(serializers.HyperlinkedModelSerializer):
         validated_data['file_hash'] = file_hash
         created_file = super().create(validated_data)
 
-        logger.info('End create file')
+        # logger.info('End create file')
         return created_file
